@@ -5,13 +5,14 @@ var Schema = mongoose.Schema;
 var ArticleSchema = new Schema({
 	title: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
 	summary: {
 		type: String,
 		required: true
 	},
-	image: {
+	img: {
 		type: String,
 		required: true
 	},
@@ -21,15 +22,18 @@ var ArticleSchema = new Schema({
 	},
 	saved: {
 		type: Boolean,
-		default: true
+		default: false
 	},
-	// `note` is an object that stores a Note id
-  // The ref property links the ObjectId to the Note model
-  // This allows us to populate the Article with an associated Note
-  note: {
-    type: Schema.Types.ObjectId,
-    ref: "Note"
-  }
+	modified: {
+		type: Date
+	}
+	// // `note` is an object that stores a Note id
+ //  // The ref property links the ObjectId to the Note model
+ //  // This allows us to populate the Article with an associated Note
+ //  note: {
+ //    type: Schema.Types.ObjectId,
+ //    ref: "Note"
+ //  }
 });
 
 // This creates our model from the above schema, using mongoose's model method
