@@ -8,7 +8,7 @@ Completed:
 - Routes to push data into the database and to display on the client
 
 Need to complete:
-- Asjust selectors to correctly push notes to the database
+- Adjust selectors to correctly push notes to the database
 - Clean up UX/UI
 - Deploy on Heroku
 
