@@ -1,7 +1,7 @@
 # buttfeed
 A web-scraped clone of BuzzFeed using Node.js.
 
-Currently in in progress
+https://buttfeed-scrape.herokuapp.com/
 
 Completed:
 - Successful scraping of the website
@@ -9,10 +9,13 @@ Completed:
 - Successfully save an article
 - Remove a saved article
 - Read stored comments
+- Deploy on Heroku
 
 Need to complete:
 - Adjust selectors to correctly push notes to the database
 - Clean up UX/UI
-- Deploy on Heroku
 
-To run, npm install to get dependencies, and launch with node server.js.
+To run:
+- view Heroku deployed site or
+-npm install to get dependencies
+launch with node server.js.
