@@ -26,6 +26,9 @@ var ArticleSchema = new Schema({
 	},
 	modified: {
 		type: Date
+	},
+	notes: {
+		type: Array
 	}
 	// // `note` is an object that stores a Note id
  //  // The ref property links the ObjectId to the Note model

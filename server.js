@@ -48,7 +48,10 @@ bfScrape();
 
 // Get Everything
 app.get("/", function(req, res){
-	db.Article.find({}, function(err, data){
+	db.Article.find({})
+	.sort({modified: -1})
+	.exec(
+	function(err, data){
 		if (err) throw err;
 		//Object for handlebars
 		var obj = {
@@ -60,26 +63,51 @@ app.get("/", function(req, res){
 });
 
 // Saved an article
-app.post("/save", function(req, res){
+// app.post("/save", function(req, res){
+// 	db.Article.update(
+// 		{
+// 			_id: req.body._id
+// 		},
+// 		{
+//       $set: {
+//         saved: req.body.saved,
+//         modified: Date.now()
+//       }
+//     },
+//     function(error, edited){
+//     	if (error) {
+//     		console.log(error);
+//     		res.send(error);
+//     	} else {
+//     		console.log(edited);
+//     		res.send(edited);
+//     	}
+//     }
+// 	);
+// });
+
+// Saved an article
+app.post("/addnote", function(req, res){
+	console.log(req.body);
 	db.Article.update(
 		{
 			_id: req.body._id
 		},
 		{
-      // Set the title, note and modified parameters
-      // sent in the req's body.
-      $set: {
-        saved: req.body.saved,
-        modified: Date.now()
+      $push: {
+        notes: {
+        	copy: req.body.note.copy,
+        	dateAdded: req.body.note.dateAdded
+        }
       }
     },
-    function(error, edited){
+    function(error, updated){
     	if (error) {
     		console.log(error);
     		res.send(error);
     	} else {
-    		console.log(edited);
-    		res.send(edited);
+    		console.log(updated);
+    		res.send(updated);
     	}
     }
 	);
@@ -89,7 +117,9 @@ app.post("/save", function(req, res){
 app.get("/saved", function(req, res){
 	db.Article.find({
 		saved: true
-	}, function(err, data){
+	}).sort({modified: -1})
+	.exec(
+	function(err, data){
 		if (err) throw err;
 		//Object for handlebars
 		var obj = {
@@ -99,6 +129,7 @@ app.get("/saved", function(req, res){
 		res.render("saved", obj);
 	});
 });
+
 
 // Start the server
 app.listen(PORT, function() {
