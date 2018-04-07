@@ -6,6 +6,9 @@ Currently in in progress
 Completed:
 - Successful scraping of the website
 - Routes to push data into the database and to display on the client
+- Successfully save an article
+- Remove a saved article
+- Read stored comments
 
 Need to complete:
 - Adjust selectors to correctly push notes to the database
