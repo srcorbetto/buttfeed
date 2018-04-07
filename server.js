@@ -41,10 +41,17 @@ app.set("view engine", "handlebars");
 // Import routes and give the server access to them
 // app.use(router);
 
+// Performs initial scrape once server starts
 bfScrape();
 
 // Temp Routes
 // ===========================================
+
+// Performs a new scrape
+app.get("/rescrape", function(req, res){
+	bfScrape();
+	res.send("success");
+});
 
 // Get Everything
 app.get("/", function(req, res){
@@ -62,7 +69,7 @@ app.get("/", function(req, res){
 	});
 });
 
-// Saved an article
+// Save an article
 app.post("/save", function(req, res){
 	db.Article.update(
 		{
@@ -86,7 +93,31 @@ app.post("/save", function(req, res){
 	);
 });
 
-// Saved an article
+// remove an article
+app.post("/remove", function(req, res){
+	db.Article.update(
+		{
+			_id: req.body._id
+		},
+		{
+      $set: {
+        saved: req.body.saved,
+        modified: Date.now()
+      }
+    },
+    function(error, edited){
+    	if (error) {
+    		console.log(error);
+    		res.send(error);
+    	} else {
+    		console.log(edited);
+    		res.send(edited);
+    	}
+    }
+	);
+});
+
+// Add a note
 app.post("/addnote", function(req, res){
 	console.log(req.body);
 	db.Article.update(

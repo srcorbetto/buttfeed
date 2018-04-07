@@ -2,6 +2,9 @@ $(document).ready(function(){
 
 	console.log("script.js connected");
 
+	// Click events
+	// ============================================
+
 	// Save article
 	$("body").on("click", ".fa-heart", function(){
 		$.ajax({
@@ -18,17 +21,33 @@ $(document).ready(function(){
 		});
 	});
 
-	// Click events
-	// =============================================
-	$("body").on("click", ".add-note", function(){
+	// Unsave article
+	$("body").on("click", ".delete-article", function(){
+		$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "/remove",
+		data: {
+			_id: $(this).attr("data-id"),
+			saved: false
+		}
+		})
+		.then(function(data){
+			console.log(data);
+		});
+	});
+
+	// Add a note
+	$("body").on("click", ".add-note", function(e){
+		e.preventDefault();
 		$.ajax({
 		type: "POST",
 		dataType: "json",
 		url: "/addnote",
 		data: {
-			_id: "5ac84e70c7f8f8963bbdffcf",
+			_id: $(this).attr("data-id"),
 			note: {
-				copy: $("textarea").val(),
+				copy: $(".note-input").val(),
 				dateAdded: Date.now()
 			}
 		}
@@ -37,9 +56,24 @@ $(document).ready(function(){
 			console.log(data.length);
 			for (i=0; i<data.length; i++) {
 				console.log(data[i]);
-				$(".card-body").append("Message: "+data[i].copy);
+				// $(".card-body").append("Message: "+data[i].copy);
 			}
 		});
 	});
+
+	// Click events
+	// ============================================
+
+	// New Scrape & Reload
+	$("body").on("click", ".scrape", function(){
+		$.get("/rescrape", function(data, status){
+			console.log(status);
+			if (status === "success") {
+				location.reload();
+			}
+		});
+	});
+
+
 	
 });

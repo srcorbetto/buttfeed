@@ -41,8 +41,8 @@ var buzzFeedScrape = function() {
 			});
 
 		});
-	});
 
+	});
 };
 
 // Run the scrape
