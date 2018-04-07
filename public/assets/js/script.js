@@ -3,20 +3,20 @@ $(document).ready(function(){
 	console.log("script.js connected");
 
 	// Save article
-	// $("body").on("click", ".card-body", function(){
-	// 	$.ajax({
-	// 	type: "POST",
-	// 	dataType: "json",
-	// 	url: "/save",
-	// 	data: {
-	// 		_id: $(this).attr("data-id"),
-	// 		saved: true
-	// 	}
-	// 	})
-	// 	.then(function(data){
-	// 		console.log(data);
-	// 	});
-	// });
+	$("body").on("click", ".fa-heart", function(){
+		$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "/save",
+		data: {
+			_id: $(this).attr("data-id"),
+			saved: true
+		}
+		})
+		.then(function(data){
+			console.log(data);
+		});
+	});
 
 	// Click events
 	// =============================================
@@ -34,7 +34,11 @@ $(document).ready(function(){
 		}
 		})
 		.then(function(data){
-			console.log(data);
+			console.log(data.length);
+			for (i=0; i<data.length; i++) {
+				console.log(data[i]);
+				$(".card-body").append("Message: "+data[i].copy);
+			}
 		});
 	});
 	

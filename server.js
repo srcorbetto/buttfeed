@@ -63,28 +63,28 @@ app.get("/", function(req, res){
 });
 
 // Saved an article
-// app.post("/save", function(req, res){
-// 	db.Article.update(
-// 		{
-// 			_id: req.body._id
-// 		},
-// 		{
-//       $set: {
-//         saved: req.body.saved,
-//         modified: Date.now()
-//       }
-//     },
-//     function(error, edited){
-//     	if (error) {
-//     		console.log(error);
-//     		res.send(error);
-//     	} else {
-//     		console.log(edited);
-//     		res.send(edited);
-//     	}
-//     }
-// 	);
-// });
+app.post("/save", function(req, res){
+	db.Article.update(
+		{
+			_id: req.body._id
+		},
+		{
+      $set: {
+        saved: req.body.saved,
+        modified: Date.now()
+      }
+    },
+    function(error, edited){
+    	if (error) {
+    		console.log(error);
+    		res.send(error);
+    	} else {
+    		console.log(edited);
+    		res.send(edited);
+    	}
+    }
+	);
+});
 
 // Saved an article
 app.post("/addnote", function(req, res){
@@ -107,10 +107,23 @@ app.post("/addnote", function(req, res){
     		res.send(error);
     	} else {
     		console.log(updated);
-    		res.send(updated);
+    		// res.send(updated);
     	}
     }
 	);
+
+	db.Article.find({_id: req.body._id}
+		,function(error, updated){
+			if (error) {
+	    		console.log(error);
+	    		res.send(error);
+	    	} else {
+	    		console.log("==============");
+	    		console.log(updated[0]);
+	    		console.log("==============");
+	    		res.send(updated[0].notes);
+	    	}
+		});
 });
 
 // Render the saved articles

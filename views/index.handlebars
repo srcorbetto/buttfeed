@@ -1,15 +1,16 @@
 <div class="container">
+	<div class="row">
 	{{#each fromDB}}
-		<div class="row">
-			<div class="col">
+			<div class="col-md-6">
 				<div class="card mt-3 mb-3">
-				  <div class="card-body" data-id="{{this._id}}">
+				  <div class="card-body">
 				    <h2 class="title">{{this.title}}</h2>
 				    <p class="summary">{{this.summary}}</p>
 				    <img src="{{this.img}}" alt="" class="img">
+				    <i class="fa fa-heart" aria-hidden="true" data-id="{{this._id}}"></i>
 				  </div>
 				</div>
 			</div>
-		</div>
 	{{/each}}
+	</div>
 </div>

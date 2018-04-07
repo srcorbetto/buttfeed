@@ -1,3 +1,41 @@
+body {
+	background: #f6f6f6;
+}
+
+.header-bar {
+	text-align: center;
+	padding-top: 10px;
+	border-bottom: 1px solid #b1b1b1;
+	position: fixed;
+	top: 0;
+	z-index: 1000;
+	background: #FFF;
+}
+
+.header-bar ul {
+	padding: 0px;
+	margin-bottom: 10px;
+}
+
+.header-bar li {
+	display: inline;
+	padding: 10px;
+	color: blue;
+}
+
+.spacer {
+	height: 100px;
+}
+
 .img {
 	width: 100%;
+}
+
+.card-body {
+	position: relative;
+}
+
+.fa-heart {
+	/*position: absolute;*/
+	color: #999999;
 }
